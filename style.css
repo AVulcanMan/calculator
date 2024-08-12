@@ -37,6 +37,13 @@
     color:white;
     font-family: impact;
     font-size:20px;
+    cursor:pointer;
+}
+.button:hover {
+    background-color: rgb(12, 230, 230);
+}
+.operator:hover{
+    background-color: #FF7F50 ;
 }
 .display {
     background:#322D31;
@@ -51,6 +58,15 @@
     border-radius:8px;
     font-size:24px;
 }
+#clear:hover {
+    background-color: red;
+}
 #back {
     font-size:24px;
+}
+#back:hover {
+    background-color: rgb(207, 207, 15);
+}
+#equal:hover {
+    background-color: rgb(137, 225, 5);
 }
