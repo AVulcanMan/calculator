@@ -78,27 +78,32 @@ numbers.forEach((button) => {
       }
     });
   });
-signs.forEach((sign) =>{
+  signs.forEach((sign) => {
     sign.addEventListener('click', () => {
-        if (![ '+', '-', '*', '/' ].some(sign => display.textContent.includes(sign)) && clicked === 0) {
+        const input = display.textContent;
+        const lastChar = input.slice(-1);
+
+        // Check if the last character is not an operator before adding a new one
+        if (['+', '-', '*', '/'].includes(lastChar)) {
+            // If the last character is already an operator, do not add another
+            return;
+        }
+
+        // If there is no operator and clicked is 0, add the operator
+        if (clicked === 0) {
             signValue = sign.getAttribute('data-value');
             display.textContent += signValue;
             clicked = 1;
-        } else if (['+', '-', '*', '/'].some(sign => display.textContent.includes(sign)) && clicked === 0) {
-            clicked = 1; 
+        } else if (clicked === 1) {
+            // Perform calculation if clicked is 1 and then add the new operator
             calculate();
             signValue = sign.getAttribute('data-value');
             display.textContent += signValue;
-            clicked=0;
-        } else if (clicked===1) {
-            calculate();
-            signValue = sign.getAttribute('data-value');
-            display.textContent += signValue;
-            clicked = 0;
-        } 
-        console.log(clicked);
+            clicked = 1;  // Reset clicked for the next operation
+        }
     });
 });
+
 
 //Function to reset everything
 clear.addEventListener('click', () => {
