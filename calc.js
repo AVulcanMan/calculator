@@ -3,9 +3,10 @@ let firstNum;
 let signValue;
 let secondNum;
 let answer;
+let displayed;
 
 //Variable that will determine if an operation is currently going on
-let clicked = false;
+let clicked = 0;
 
 
 //Functions for addition, subtraction, divison, and multiplication
@@ -14,7 +15,7 @@ function add (number1,number2){
 }
 function divide (number1, number2){
     if (number2===0) {
-        alert("You can't divide by 0! Go back to fourth grade!")
+        alert("You can't divide by 0! Go back to fourth grade!");
     } else {
         return number1/number2;
     }
@@ -35,6 +36,25 @@ function operate (signValue, firstNum, secondNum) {
     } else if (signValue === "-") {
       return  subtract (firstNum, secondNum);
     }
+}
+
+//Displaying everything properly
+function calculate () {
+    const input = display.textContent;
+    const part = input.split(signValue);
+    //Make sure there's a valid operator
+    if (clicked===1){
+        firstNum = parseInt(part[0]);  //Needed so that the addition function doesn't join the two strings
+        secondNum = parseInt (part[1]);
+        answer = operate(signValue, firstNum, secondNum);
+        if (isNaN(answer)){
+            display.textContent='0';
+        } else {
+            displayed = Math.round(answer*1000)/1000;
+            display.textContent = displayed;
+        }
+
+    } 
 }
 
 //Important body elements
@@ -59,13 +79,23 @@ numbers.forEach((button) => {
   });
 signs.forEach((sign) =>{
     sign.addEventListener('click', () => {
-        signValue = sign.getAttribute('data-value');
-        if (clicked === true ) {
-            return false;
-        } else {
+        if (![ '+', '-', '*', '/' ].some(sign => display.textContent.includes(sign)) && clicked === 0) {
+            signValue = sign.getAttribute('data-value');
             display.textContent += signValue;
-            clicked = true;
-        }
+            clicked = 1;
+        } else if (['+', '-', '*', '/'].some(sign => display.textContent.includes(sign)) && clicked === 0) {
+            clicked = 1; 
+            calculate();
+            signValue = sign.getAttribute('data-value');
+            display.textContent += signValue;
+            clicked=0;
+        } else if (clicked===1) {
+            calculate();
+            signValue = sign.getAttribute('data-value');
+            display.textContent += signValue;
+            clicked = 0;
+        } 
+        console.log(clicked);
     });
 });
 
@@ -75,20 +105,16 @@ clear.addEventListener('click', () => {
     signValue;
     firstNum;
     secondNum;
-    clicked = false;
+    clicked = 0;
 });
 
 equal.addEventListener('click', () =>{
-    const input = display.textContent;
-    const part = input.split(signValue);
-    let displayed;
-    //Make sure there's a valid operator
-    if (clicked===true){
-        firstNum = parseInt(part[0]);  //Needed so that the addition function doesn't join the two strings
-        secondNum = parseInt (part[1]);
-        answer = operate(signValue, firstNum, secondNum);
-        displayed = Math.round(answer*1000)/1000;
-        display.textContent = displayed;
-        clicked = false;
+    calculate ();
+    if (['+', '-', '*', '/'].some(sign => display.textContent.includes(sign)) && clicked === 0) {
+        clicked = 1; 
+        calculate();
+        clicked=0;
     } 
+    clicked = 0;
+    console.log(clicked);
 });
