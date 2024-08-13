@@ -64,6 +64,7 @@ const numbers = document.querySelectorAll('.content');
 const signs = document.querySelectorAll('.operator');
 const clear = document.getElementById('clear');
 const equal = document.getElementById('equal');
+const back  = document.getElementById('back');
 
 //Functions to display numbers and operators
 numbers.forEach((button) => {
@@ -117,4 +118,14 @@ equal.addEventListener('click', () =>{
     } 
     clicked = 0;
     console.log(clicked);
+});
+
+back.addEventListener('click', () => {
+    displayed = display.textContent;
+    let removedChar = displayed.slice(-1); 
+    if (removedChar === '+' || removedChar === '-' || removedChar === '*' || removedChar === '/') {
+        clicked = 0;
+    }
+    displayed = displayed.slice(0, -1);
+    display.textContent = displayed;
 });
