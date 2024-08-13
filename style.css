@@ -32,7 +32,7 @@
     height:3em;
     margin:0.3em;
     background-color: #7f7d9c;
-    border-width: 0;
+    border:none;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     color:white;
     font-family: impact;
@@ -45,13 +45,20 @@
 .operator:hover{
     background-color: #FF7F50 ;
 }
-.display {
+#display {
     background:#322D31;
     width:95%;
     height:15em;
     margin:1em;
     border-radius:8px;
     border: 1px solid black;
+    color:white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    padding:0.9em;
 }
 #clear {
     width:5em;

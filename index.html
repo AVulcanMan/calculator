@@ -3,32 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title style="display: none;">Calculator</title>
-    <link href="style.css" rel = "stylesheet">
-
+    <title style="display: none;">Final Calculator</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <div class="calcBody">
-        <div class="display">
-
-        </div>
+        <div class="display" id="display">0</div>
         <div class="buttons">
-            <button class="button">7</button>
-            <button class="button">8</button>
-            <button class="button">9</button>
-            <button class="button operator">&divide;</button>
-            <button class="button">4</button>
-            <button class="button">5</button>
-            <button class="button">6</button>
-            <button class="button operator">&times;</button>
-            <button class="button">1</button>
-            <button class="button">2</button>
-            <button class="button">3</button>
-            <button class="button operator">+</button>
-            <button class="button">.</button>
-            <button class="button">0</button>
-            <button class="button" id="equal">=</button>
-            <button class="button operator">&minus;</button>
+            <button class="button content" data-value="7">7</button>
+            <button class="button content" data-value="8">8</button>
+            <button class="button content" data-value="9">9</button>
+            <button class="button operator content" data-value="/">&#247;</button>
+            <button class="button content" data-value="4">4</button>
+            <button class="button content" data-value="5">5</button>
+            <button class="button content" data-value="6">6</button>
+            <button class="button operator content" data-value="*">&#215;</button>
+            <button class="button content" data-value="1">1</button>
+            <button class="button content" data-value="2">2</button>
+            <button class="button content" data-value="3">3</button>
+            <button class="button operator content" data-value="+">+</button>
+            <button class="button content" data-value="0">0</button>
+            <button class="button content" data-value=".">.</button>
+            <button class="button" id="equal" data-value="=">=</button>
+            <button class="button operator content" data-value="-">&minus;</button>
             <button class="button" id="clear">CLEAR</button>
             <button class="button" id="back">&larr;</button>
         </div>
