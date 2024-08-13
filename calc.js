@@ -65,6 +65,7 @@ const signs = document.querySelectorAll('.operator');
 const clear = document.getElementById('clear');
 const equal = document.getElementById('equal');
 const back  = document.getElementById('back');
+const decimal = document.getElementById('decimal');
 
 //Functions to display numbers and operators
 numbers.forEach((button) => {
@@ -134,3 +135,7 @@ back.addEventListener('click', () => {
     displayed = displayed.slice(0, -1);
     display.textContent = displayed;
 });
+
+decimal.addEventListener('click', () => {
+    alert("This feature isn't supported");
+})
