@@ -8,6 +8,15 @@ let displayed;
 //Variable that will determine if an operation is currently going on
 let clicked = 0;
 
+//Important body elements
+const display = document.getElementById ('display');
+const buttons = document.querySelectorAll('.displayed');
+const numbers = document.querySelectorAll('.content');
+const signs = document.querySelectorAll('.operator');
+const clear = document.getElementById('clear');
+const equal = document.getElementById('equal');
+const back  = document.getElementById('back');
+const decimal = document.getElementById('decimal');
 
 //Functions for addition, subtraction, divison, and multiplication
 function add (number1,number2){
@@ -38,13 +47,13 @@ function operate (signValue, firstNum, secondNum) {
     }
 }
 
-//Displaying everything properly
 function calculate () {
     const input = display.textContent;
     const part = input.split(signValue);
     //Make sure there's a valid operator
     if (clicked===1){
-        firstNum = parseInt(part[0]);  //Needed so that the addition function doesn't join the two strings
+        //Needed so that the addition function doesn't join the two strings
+        firstNum = parseInt(part[0]);  
         secondNum = parseInt (part[1]);
         answer = operate(signValue, firstNum, secondNum);
         if (isNaN(answer)){
@@ -57,21 +66,10 @@ function calculate () {
     } 
 }
 
-//Important body elements
-const display = document.getElementById ('display');
-const buttons = document.querySelectorAll('.displayed');
-const numbers = document.querySelectorAll('.content');
-const signs = document.querySelectorAll('.operator');
-const clear = document.getElementById('clear');
-const equal = document.getElementById('equal');
-const back  = document.getElementById('back');
-const decimal = document.getElementById('decimal');
-
 //Functions to display numbers and operators
 numbers.forEach((button) => {
     button.addEventListener('click', () => {
-      const buttonValue = button.getAttribute('data-value'); // Get the value from the button's data attribute
-      // Update the display with the button's value
+      const buttonValue = button.getAttribute('data-value'); 
       if (display.textContent === '0') {
         display.textContent = buttonValue;
       } else {
@@ -86,27 +84,21 @@ numbers.forEach((button) => {
 
         // Check if the last character is not an operator before adding a new one
         if (['+', '-', '*', '/'].includes(lastChar)) {
-            // If the last character is already an operator, do not add another
             return;
         }
-
-        // If there is no operator and clicked is 0, add the operator
         if (clicked === 0) {
             signValue = sign.getAttribute('data-value');
             display.textContent += signValue;
             clicked = 1;
         } else if (clicked === 1) {
-            // Perform calculation if clicked is 1 and then add the new operator
             calculate();
             signValue = sign.getAttribute('data-value');
             display.textContent += signValue;
-            clicked = 1;  // Reset clicked for the next operation
+            clicked = 1; 
         }
     });
 });
 
-
-//Function to reset everything
 clear.addEventListener('click', () => {
     display.textContent = '0';
     signValue;
